@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>春暖杏林·健康同行</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "华文行楷", "楷体", cursive;
+            background: #f5eee2;
+            color: #5a3e36;
+            overflow-x: hidden;
+        }
+
+        .page {
+            width: 100vw;
+            height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 第一页样式 */
+        #page1 {
+            background: linear-gradient(to bottom, #fff8f0 0%, #f5e6d3 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .banner {
+            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAKrVq36zwjjgzhhYWGMYAEYB8RmROaABADeOQ8CXl/xfgAAAABJRU5ErkJggg==') repeat,
+                        linear-gradient(to right, #a83333 0%, #6b2020 100%);
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(90,62,54,0.2);
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .title {
+            font-size: 2rem;
+            color: #fff;
+            text-align: center;
+            line-height: 1.5;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .deco-line {
+            width: 80%;
+            height: 2px;
+            background: #a83333;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .deco-line::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #a83333;
+            border-radius: 50%;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* 第二页样式 */
+        #page2 {
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="100" height="100" fill="%23f5e6d3"/><path d="M-1-1h102v102H-1z" fill="none" stroke="%23987654" stroke-width="2"/></svg>') repeat;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hospital-title {
+            font-size: 1.8rem;
+            color: #5a3e36;
+            text-align: center;
+            padding: 20px;
+            border: 3px double #987654;
+            background: rgba(255,255,255,0.8);
+        }
+
+        /* 传统元素装饰 */
+        .cloud-deco {
+            position: absolute;
+            width: 120px;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <!-- 第一页 -->
+    <div class="page" id="page1">
+        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M20,50 Q40,30 60,50 Q80,70 100,50' fill='none' stroke='%23987654' stroke-width='2'/></svg>" 
+             class="cloud-deco" style="top:10%; left:5%">
+        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M30,70 Q50,90 70,70' fill='none' stroke='%23987654' stroke-width='2'/></svg>" 
+             class="cloud-deco" style="bottom:10%; right:5%">
+        
+        <div class="banner">
+            <h1 class="title">春暖杏林<br>健康同行</h1>
+            <div style="font-size: 1.2rem; text-align: center; margin-top: 10px;">中医义诊集市活动</div>
+        </div>
+
+        <div class="deco-line"></div>
+        <div style="text-align: center; font-size: 1.1rem;">悬壶济世传薪火<br>仁心仁术惠万家</div>
+    </div>
+
+    <!-- 第二页 -->
+    <div class="page" id="page2">
+        <h2 class="hospital-title">广州勤正中医医院</h2>
+    </div>
+
+    <script>
+        // 简单滑动切换
+        let startY;
+        const page1 = document.getElementById('page1');
+        const page2 = document.getElementById('page2');
+
+        document.addEventListener('touchstart', e => {
+            startY = e.touches[0].clientY;
+        });
+
+        document.addEventListener('touchend', e => {
+            const endY = e.changedTouches[0].clientY;
+            const deltaY = startY - endY;
+
+            if (deltaY > 50 && page1.style.display !== 'none') {
+                page1.style.display = 'none';
+                page2.style.display = 'flex';
+            } else if (deltaY < -50 && page2.style.display !== 'none') {
+                page2.style.display = 'none';
+                page1.style.display = 'flex';
+            }
+        });
+    </script>
+</body>
+</html>
